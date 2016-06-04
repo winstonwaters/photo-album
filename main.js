@@ -3,8 +3,8 @@ $(document).ready(function () {
   var albumsStr = '';
   albums.forEach(function (element,idx,arr) {
     albumsStr += `<div class="album" data-id="${element.id}">
-                  <h3>${element.title}</h3>
                   <img src="${element.cover}" alt="">
+                  <h3>${element.title}</h3>
                   </div>`;
   })
 
@@ -31,6 +31,7 @@ $('.albums').html(albumsStr); //add albums with cover
 
 
 // make the photo big
+
 var selectingBigPhoto =
   albums.map(function (element,idx,arr){
   return element.id
@@ -42,7 +43,7 @@ var selectingBigPhoto =
 
 $('.albumDetail').on('click', function (event) {
   event.preventDefault();
-  console.log($(this).data('pictures'));
+  console.log($('.photo').find('img') + " help");
   var photoID = $(this).data('pictures');
   var selectedPhoto = albums.filter(function (element, idx, arr) {
     return element.photo === photoID;
@@ -90,9 +91,14 @@ $('.albumDetail').on('click', function (event) {
 
 // making header jump pages
 $('h2').on('click', function (element,idx,arr){
-  $('.albums').removeClass('hidden');
+  $('.albums').addClass('hidden');
   $('.albumDetail').removeClass('hidden');
-  $('.photoZoom').removeClass('hidden');
+  $('.photoZoom').addClass('hidden');
   })
+
+//go back button
+// $('button').on('click', function (element,idx,arr) {
+//   return window.history.back();
+// }
 
 });
