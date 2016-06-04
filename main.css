@@ -1,0 +1,63 @@
+/*HEADER AND BODY STYLES*/
+* {
+  font-family: Gotham;
+  text-decoration: none;
+  list-style: none;
+  color: white;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #95B9C2;
+}
+.container {
+  clear: both;
+  width: 90%;
+  margin: 0 auto;
+}
+.header {
+  display: block;
+  width: 100%
+}
+h2 {
+  text-align: center;
+}
+
+/*ASIDE*/
+.aside {
+  font-size: 2em;
+  padding: 2%;
+  background-color: blue;
+  text-align: center;
+  vertical-align: top;
+  display: inline-block;
+  width: 32%;
+  vertical-align: top;
+}
+/*albums*/
+.albums {
+  width: 63%;
+}
+
+
+/*album details*/
+.albumDetail .photo{
+  display: inline-block;
+}
+.albumDetail img{
+  width: 150px;
+  transition: all .5s ease;
+  display: inline-block;
+}
+.albumDetail img:hover{
+  transform: scale(2);
+}
+.albums img{
+  display: inline-flex;
+  vertical-align: top;
+  width: 300px
+}
+
+.hidden {
+  display: none; !important
+}
