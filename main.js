@@ -20,7 +20,7 @@ $('.albums').html(albumsStr); //add albums with cover
       })
       var photoStr = '';
       selectedAlbum[0].pictures.forEach (function (element, idx, arr) {
-        photoStr += `<div class="photo">
+        photoStr += `<div class="photo" data-id="${element.photo}">
                     <img src="${element.photo}" alt"">
                     </div>`
       });
@@ -32,31 +32,28 @@ $('.albums').html(albumsStr); //add albums with cover
 
 // make the photo big
 
-var selectingBigPhoto =
-  albums.map(function (element,idx,arr){
-  return element.id
-  })
-  selectingBigPhoto.filter(function(element){
-  return $('.photoZoom').html(selectingBigPhoto)
-})
-
-
-$('.albumDetail').on('click', function (event) {
+$('.albumDetail').on('click', '.photo', function (event) {
   event.preventDefault();
-  console.log($('.photo').find('img') + " help");
-  var photoID = $(this).data('pictures');
-  var selectedPhoto = albums.filter(function (element, idx, arr) {
-    return element.photo === photoID;
+  var photoID = $(this).data('id');
+  var selectedPhoto = albums.find(function (element) {
+    return element.pictures.find(function(el){
+    return el.photo === photoID;
+  });
   })
+  var retArr = selectedPhoto.pictures.filter(function(i){
+    return i.photo === photoID; //grabs one photo
+  })
+  console.log(retArr);
   var photosBig = '';
-  selectedPhoto[0].pictures.forEach(function (element, idx, arr) {
-    photosBig += `<div class="largePhoto">
+  retArr.forEach(function (element, idx, arr) {
+    photosBig += `<div class="largePhoto" data-id="${element.photo}">
                 <img src="${element.photo}" alt"">
                 <h3>${element.caption}</h3>
                 </div>`
   });
   $('.photoZoom').html(photosBig);
   $('.photoZoom').addClass('active');
+  $(this).siblings().hide();
   $('.albumDetail').hide();
   $('.aside').hide();
 })
@@ -88,17 +85,9 @@ $('.albumDetail').on('click', function (event) {
     $('.albums').html(photoStr);
   })
 
-
-// making header jump pages
-$('h2').on('click', function (element,idx,arr){
-  $('.albums').addClass('hidden');
-  $('.albumDetail').removeClass('hidden');
-  $('.photoZoom').addClass('hidden');
-  })
-
-//go back button
-// $('button').on('click', function (element,idx,arr) {
-//   return window.history.back();
-// }
+//reload from header
+$('h2').on('click', function (element,idx,arr) {
+location.reload();
+})
 
 });
